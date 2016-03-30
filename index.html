@@ -99,7 +99,20 @@
 	                [1, 0],
 	                [1, 1]
 	            ];
-		}	
+		}
+	}
+
+	class Straight_Polyomino extends Piece {
+		constructor() {
+			super();
+			this.values = [
+				[0, 0],
+				[0, 1],
+				[0, 2],
+				[0, 3]
+			];
+			this.color = 0x06eff2;
+		}
 	}
 
 	class T_Polyomino extends Piece {
@@ -112,6 +125,58 @@
 	                [2, 0]
 	            ];
 	        this.color = 0xff02ff;
+		}
+	}
+
+	class J_Polyomino extends Piece {
+		constructor() {
+			super();
+			this.values = [
+	                [0, 0],
+	                [1, 0],
+	                [2, 0],
+	                [2, 1]
+	            ];
+	        this.color = 0x0000ff;
+		}
+	}
+
+	class L_Polyomino extends Piece {
+		constructor() {
+			super();
+			this.values = [
+				[0, 0],
+				[1, 0],
+				[2, 0],
+				[2, 1]
+			];
+			this.color = 0xff8001;
+		}
+	}
+
+	class S_Polyomino extends Piece {
+		constructor() {
+			super();
+			this.values = [
+				[0, 1],
+				[1, 0],
+				[1, 1],
+				[2, 0]
+			];
+			this.color = 0x00ff01;
+		}
+	}
+
+	class Z_Polyomino extends Piece {
+		constructor() {
+			super();
+			this.values = [
+				[0, 0],
+				[1, 0],
+				[1, 1],
+				[2, 1]
+			];
+			this.color = 0xff0000;
 		}
 	}
 
