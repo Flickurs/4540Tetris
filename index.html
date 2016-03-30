@@ -17,6 +17,15 @@
 
 <script>
 	"use strict";
+	var Polyominos = {
+		STRAIT: 0,
+		SQUARE: 1,
+		T: 2,
+		J: 3,
+		L: 4,
+		S: 5,
+		Z: 6
+	};
 	var color_array = [0xff0000, 0x00ff00, 0x0000ff];
 	var color_index = 0;
 	class Piece {
@@ -95,7 +104,7 @@
 		}
 	}
 
-	class Square extends Piece {
+	class Square_Polyomino extends Piece {
 		constructor() {
 			super();
 			this.color = 0xffcc00;
@@ -201,6 +210,7 @@
 	    draw() {
 	        this.square.clear();
 	        this.square.beginFill(this.color);
+	        this.square.lineStyle(1, 0xFFFFFF);
 	        this.square.drawRect(0, 0, 25, 25);
 	        this.square.endFill()
 	    }
@@ -219,17 +229,47 @@
 	        this.board.addChild(this.outline);
 	        this.build_matrix(this.board);
 	        stage.addChild(this.board);
-	        this.current_piece = new Square();
+	        // this.current_piece = new Square_Polyomino();
+	        this.random_piece();
 	        this.draw_piece();
 	        document.addEventListener('keydown', this.handle_key_presses.bind(this))
 	    }
+
+	    random_piece(){
+	    	var random = Math.floor(Math.random() * 7);
+	    	switch(random){
+	    		case Polyominos.STRAIT:
+	    			this.current_piece = new Straight_Polyomino();
+	    			break;
+	    		case Polyominos.SQUARE:
+	    			this.current_piece = new Square_Polyomino();
+	    			break;
+	    		case Polyominos.T:
+	    			this.current_piece = new T_Polyomino();
+	    			break;
+	    		case Polyominos.J:
+	    			this.current_piece = new J_Polyomino();
+	    			break;
+	    		case Polyominos.L:
+	    			this.current_piece = new L_Polyomino();
+	    			break;
+	    		case Polyominos.S:
+	    			this.current_piece = new S_Polyomino();
+	    			break;
+	    		case Polyominos.Z:
+	    			this.current_piece = new Z_Polyomino();
+	    			break;
+	    	}
+	    }
+
 	    handle_key_presses(key) {
 	        if (key.code == "ArrowDown") {
 	            this.current_piece.down();
 	            if (this.current_piece.conflict(this.board_matrix)) {
 	                this.current_piece.up();
 	                this.current_piece.fill(this.board_matrix);
-	                this.current_piece = new Square();
+	                // this.current_piece = new Square();
+	                this.random_piece();
 	                this.draw_piece()
 	            }
 	        }
