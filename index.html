@@ -17,6 +17,15 @@
 
 <script>
 	"use strict";
+	var Polyominos = {
+		STRAIT: 0,
+		SQUARE: 1,
+		T: 2,
+		J: 3,
+		L: 4,
+		S: 5,
+		Z: 6
+	};
 	var color_array = [0xff0000, 0x00ff00, 0x0000ff];
 	var color_index = 0;
 	class Piece {
@@ -89,7 +98,7 @@
 	    }
 	}
 
-	class Square extends Piece {
+	class Square_Polyomino extends Piece {
 		constructor() {
 			super();
 			this.color = 0xffcc00;
@@ -148,10 +157,31 @@
 	        this.board.addChild(this.outline);
 	        this.build_matrix(this.board);
 	        stage.addChild(this.board);
-	        this.current_piece = new Square();
+	        this.current_piece = new Square_Polyomino();
 	        this.draw_piece();
 	        document.addEventListener('keydown', this.handle_key_presses.bind(this))
 	    }
+
+	    random_piece(){
+	    	var random = Math.floor(Math.random() * 7);
+	    	switch(random){
+	    		case Polyominos.STRAIT:
+	    			break;
+	    		case Polyominos.SQUARE:
+	    			break;
+	    		case Polyominos.T:
+	    			break;
+	    		case Polyominos.J:
+	    			break;
+	    		case Polyominos.L:
+	    			break;
+	    		case Polyominos.S:
+	    			break;
+	    		case Polyominos.Z:
+	    			break;
+	    	}
+	    }
+
 	    handle_key_presses(key) {
 	        if (key.code == "ArrowDown") {
 	            this.current_piece.down();
