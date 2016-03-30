@@ -70,6 +70,19 @@
 	            this.i = 10 - this.width;
 	        }
 	    }
+
+	    rotate()
+	    {
+	    	var temp = this.width;
+	    	this.width = this.height;
+	    	this.height = temp;
+	    	for(var i = 0; i < this.values.length; i++) {
+	    		var temp = this.values[i][0];
+	    		this.values[i][0] = this.values[i][1];
+	    		this.values[i][1] = temp*(-1);
+	    	}
+	    }
+
 	    draw(matrix) {
 	        for (var i = 0; i < this.values.length; i++) {
 	            var cell = matrix[this.i + this.values[i][0]][this.j + this.values[i][1]];
@@ -130,10 +143,14 @@
 		constructor() {
 			super(3, 2);
 			this.values = [
+	                // [0, 0],
+	                // [1, 0],
+	                // [1, 1],
+	                // [2, 0]
+	                [-1, 0],
 	                [0, 0],
-	                [1, 0],
-	                [1, 1],
-	                [2, 0]
+	                [0, 1],
+	                [1, 0]
 	            ];
 	        this.color = 0xff02ff;
 		}
@@ -280,6 +297,9 @@
 	            if (this.current_piece.conflict(this.board_matrix)) {
 	                this.current_piece.left()
 	            }
+	        }
+	        if (key.keyCode == 32) {
+	        	this.current_piece.rotate();
 	        }
 	        this.clear_board();
 	        this.draw_piece()
