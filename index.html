@@ -253,7 +253,7 @@
 	    }
 
 	    tick() {
-	    	this.handle_key_presses("ArrowDown"); 
+	    	this.handle_key_presses("ArrowDown");
 	    }
 
 	    random_piece(){
@@ -282,15 +282,47 @@
 	    			break;
 	    	}
 	    }
+	    remove_rows() {
+	    	var j = 19;
+	    	var drop_x_rows = 0;
+	    	while (j > 0) {
+	    		if (this.board_row_count[j] == 0) {
+	    			break;
+	    		}
+	    		if (this.board_row_count[j] == 10) {
+	    			drop_x_rows++;
 
+	    			var j2 = j-1;
+	    			while (this.board_row_count[j2] != 10 && j2 != 0
+	    				&& (this.board_row_count[j2] != 0 || this.board_row_count[j2+drop_x_rows] != 0)) {
+	    				for (var i = 0; i < 10; i++) {
+							var currentCell = this.board_matrix[i][j2];
+							var belowCell = this.board_matrix[i][j2+drop_x_rows];
+
+							belowCell.visible = currentCell.visible;
+							belowCell.color = currentCell.color;
+							belowCell.filled = currentCell.filled;
+						}
+						this.board_row_count[j2+drop_x_rows] = this.board_row_count[j2--];
+	    			}
+
+	    			j = j2;
+	    		}
+	    		else {
+	    			j--;
+	    		}
+	    	}
+	    	this.clear_board();
+	    }
 	    handle_key_presses(key) {
 	        if (key.code == "ArrowDown" || key == "ArrowDown") {
 	            this.current_piece.down();
 	            if (this.current_piece.conflict(this.board_matrix)) {
 	                this.current_piece.up();
 	                this.current_piece.fill(this.board_matrix, this.board_row_count);
+	                this.remove_rows();
 	                this.random_piece();
-	                this.draw_piece()
+	                this.draw_piece();
 	            }
 	        }
 	        if (key.code == "ArrowLeft") {
