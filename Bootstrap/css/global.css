@@ -16,9 +16,27 @@
 	z-index: -1;
 }
 
+.opaque-cover
+{
+	position: fixed;
+	width: 450px;
+	height: 620px;
+}
+
 .opaque
 {
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.9);
+}
+
+.center
+{
+	top: 50%;
+	height: 40px;
+	margin-top: -20px;
+	width: 337px;
+	position: absolute;
+	left: 225px;
+	margin-left: -190px;
 }
 
 .set-bg
