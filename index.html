@@ -240,7 +240,6 @@
 	        this.board.addChild(this.outline);
 	        this.build_matrix(this.board);
 	        stage.addChild(this.board);
-	        // this.current_piece = new Square_Polyomino();
 	        this.random_piece();
 	        this.draw_piece();
 	        document.addEventListener('keydown', this.handle_key_presses.bind(this));
@@ -248,7 +247,6 @@
 	    }
 
 	    start_game_loop() {
-	    	// var self = this;
 	    	setInterval(this.tick.bind(this), 1000);
 	    }
 
@@ -263,29 +261,6 @@
 	        this.clear_board();
 	        this.draw_piece()
 	    }
-
-	    // game_loop() {
-	    // 	var self = this;
-	    // 	setInterval(function() {
-	    // 		self.tick(self);
-	    // 		self.render(self);
-	    // 	}, 1000);
-	    // }
-
-	    // tick(self) {
-	    // 	self.current_piece.down();
-	    // 	if (self.current_piece.conflict(self.board_matrix)) {
-     //            self.current_piece.up();
-     //            self.current_piece.fill(self.board_matrix);
-     //            // self.current_piece = new Square();
-     //            self.random_piece();
-     //            self.draw_piece()
-     //        }
-	    // }
-
-	    // render(self) {
-
-	    // }
 
 	    random_piece(){
 	    	var random = Math.floor(Math.random() * 7);
@@ -320,7 +295,6 @@
 	            if (this.current_piece.conflict(this.board_matrix)) {
 	                this.current_piece.up();
 	                this.current_piece.fill(this.board_matrix);
-	                // this.current_piece = new Square();
 	                this.random_piece();
 	                this.draw_piece()
 	            }
