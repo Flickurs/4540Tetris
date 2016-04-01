@@ -4,16 +4,80 @@
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
     <meta content="utf-8" http-equiv="encoding"/>
     <title>Tetris Example </title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- THIS FIRST -->
     <script src="jquery-1.11.2.min.js"></script> <!-- 1 - JQUERY -->
     <script src="Pixi/pixi.js"></script>
+    <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Bootstrap/css/global.css">
+	<script src="Libraries/jquery-2.2.1.min.js"></script>
+	<script src="Bootstrap/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-  <div class="c4"> </div>
+	<div class="background background-image"></div>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      				<span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+
+				<a class="navbar-brand" href="../">Tetris</a>
+			</div>
+			<div style="height: 1px" aria-expanded="falst" id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Info</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Readme</a></li>
+							<li><a href="#">All Scores</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<h1 style="color:white;">Tetris</h1>
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+		   	<div id="parent"></div>
+		</div>
+
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="well">
+				<h2>High Scores</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>User</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Matt</td>
+							<td>9000</td>
+						</tr>
+						<tr>
+							<td>Mike</td>
+							<td>Is a bitch</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
 
 <script>
 	"use strict";
@@ -397,6 +461,13 @@
 	    renderer.render(stage)
 	}
 	after_load();
+</script>
+
+<script>
+	$(function(){
+		var element = $("canvas").detach();
+		$("#parent").append(element);
+	});
 </script>
 
 </body>
