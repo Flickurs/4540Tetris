@@ -322,6 +322,7 @@
 	        this.next_piece = this.random_piece();
 	        this.draw_piece();
 	        this.draw_next();
+	        this.key_event_handler = this.handle_key_presses.bind(this);
 	        // document.addEventListener('keydown', this.handle_key_presses.bind(this));
 	        // this.start_game_loop();
 	    }
@@ -349,7 +350,13 @@
 	    }
 
 	    start_game_loop() {
-	    	setInterval(this.tick.bind(this), 500);
+	    	this.interval = setInterval(this.tick.bind(this), 500);
+	    }
+
+	    end_game_loop() {
+	    	clearInterval(this.interval);
+	    	// document.removeEventListener('keydown', this.handle_key_presses.bind(this));
+	    	set_opaque();
 	    }
 
 	    tick() {
@@ -423,6 +430,9 @@
 	            if (this.current_piece.conflict(this.board_matrix)) {
 	                this.current_piece.up();
 	                this.current_piece.fill(this.board_matrix, this.board_row_count);
+	            	if(this.board_row_count[0] > 0) {
+	            		this.end_game_loop();
+	            	}
 	                this.remove_rows();
 	                this.next_piece.i = 4;
 			    	this.next_piece.j = 0;
@@ -523,6 +533,7 @@
 	var renderer;
 	var score;
 	var game;
+	var opaque;
 
 	function after_load() {
 	    stage = new PIXI.Container();
@@ -540,9 +551,15 @@
 	after_load();
 
 	function start_game() {
-		$("#screen").detach();
-		document.addEventListener('keydown', game.handle_key_presses.bind(game));
+		opaque = $("#screen").detach();
+		document.addEventListener('keydown', game.key_event_handler);
         game.start_game_loop();
+	}
+
+	function set_opaque() {
+		document.removeEventListener('keydown', game.key_event_handler);
+		$(opaque).insertBefore("canvas");
+		game = new Tetris(stage);
 	}
 
 	function increment_score(score) {
