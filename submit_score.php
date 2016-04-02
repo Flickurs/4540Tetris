@@ -20,9 +20,7 @@ function echoScores($error)
 {
 	try
 	{
-	    $db = new PDO("mysql:host=$server_name;dbname=$db_name;charset=utf8", $db_user_name, $db_password);
-	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		global $db;
 
 	    $query = "SELECT tname,score FROM high_scores ORDER BY score DESC LIMIT 10;";
 
@@ -34,9 +32,9 @@ function echoScores($error)
 	    while ($row = $statement->fetch(PDO::FETCH_ASSOC))
 	    	$htmlString .= "
 	    					<tr>
-								<td>{$rank++}</td>
+								<td>" . $rank++ . "</td>
 								<td>" . htmlspecialchars($row['tname']) . "</td>
-								<td>{$row['score']}</td>
+								<td>" . $row['score'] . "</td>
 							</tr>";
 
 	    echo json_encode(array(error=>$error, html=>$htmlString));
@@ -47,15 +45,11 @@ function echoScores($error)
 	}
 }
 
-$error = false;
-
 if (isset($_REQUEST['name']) && isset($_REQUEST['score']))
 {
 	try
 	{
-	    $db = new PDO("mysql:host=$server_name;dbname=$db_name;charset=utf8", $db_user_name, $db_password);
-	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		global $db;
 
 	    $query = "INSERT INTO high_scores (tname,score) VALUES (?,?);";
 		$statement = $db->prepare( $query );

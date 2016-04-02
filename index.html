@@ -10,7 +10,6 @@
     <script src="Pixi/pixi.js"></script>
     <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="Bootstrap/css/global.css">
-	<script src="Libraries/jquery-2.2.1.min.js"></script>
 	<script src="Bootstrap/js/bootstrap.min.js"></script>
 
 </head>
@@ -525,14 +524,24 @@
 	var game;
 	var opaque;
 
-	function get_high_scores()
+	function get_high_scores(player_score)
 	{
 		$.ajax(
-		{
-			type:'POST',
-		    url: "submit_score.php",
-		    dataType: "json",
-		})
+			((player_score != null) ?
+				{
+					type:'POST',
+				    url: "submit_score.php",
+				    dataType: "json",
+				}
+				:
+				{
+					type:'POST',
+				    url: "submit_score.php",
+				    data: "name=" + "fdsaf" + "&score=" + player_score,
+				    dataType: "json",
+				}
+			)
+		)
 		.done( function ( data )
 		{
 			$('#high_scores').innerHTML = data.html;
