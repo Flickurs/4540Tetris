@@ -103,16 +103,6 @@
 							</tr>
 						</thead>
 						<tbody id="high_scores">
-							<tr>
-								<td>1</td>
-								<td>Matt</td>
-								<td>9000</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Mike</td>
-								<td>Is a bitch</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -560,6 +550,24 @@
 	var game;
 	var opaque;
 
+	function get_high_scores()
+	{
+		$.ajax(
+		{
+			type:'POST',
+		    url: "submit_score.php",
+		    dataType: "json",
+		})
+		.done( function ( data )
+		{
+			$('#high_scores').innerHTML = data.html;
+		})
+		.fail( function ( text, options, err )
+		{
+
+		});
+	}
+
 	function after_load() {
 	    stage = new PIXI.Container();
 	    stage.interactive = true;
@@ -598,6 +606,7 @@
 	$(function(){
 		var element = $("canvas").detach();
 		$("#parent").append(element);
+		get_high_scores();
 	});
 </script>
 

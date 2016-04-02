@@ -18,7 +18,7 @@
 
 .opaque-cover
 {
-	position: fixed;
+	position: absolute;
 	width: 450px;
 	height: 620px;
 }
