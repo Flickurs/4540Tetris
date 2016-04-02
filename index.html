@@ -46,6 +46,31 @@
 		</div>
 	</nav>
 
+	<div class="modal fade" id="submit_score" role="dialog">
+		<form role="form" id="send_score" onsubmit="get_high_scores($('#submit_score_value').val())">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Submit Score</h3>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<h4>Player Name</h4>
+							<input name="user_name" type="text" class="form-control" placeholder="Player Name">
+						</div>
+						<div class="form-group">
+							<h4>Score</h4>
+							<input id="sumbit_score_value" name="user_score" type="text" readonly class="form-control">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 
 	<div class="container">
 		<div class="col-xs-12 col-lg-10"><h1 class="well">Tetris</h1></div>
@@ -559,6 +584,8 @@
 	function set_opaque() {
 		document.removeEventListener('keydown', game.key_event_handler);
 		$(opaque).insertBefore("canvas");
+		$("#submit_score").modal("show");
+		$("#sumbit_score_value").val(score);
 		game = new Tetris(stage);
 	}
 
