@@ -240,14 +240,14 @@ a.bg-brown:hover
 	color: white;
 }
 
-@-webkit-keyframes redPulse {
+@-webkit-keyframes greenPulse {
 	from { text-shadow: 0 0 none; }
 	50% { text-shadow: 0 0 18px #f00; }
 	to { text-shadow: 0 0 none; }
 }
 
 .text-pulse {
-  -webkit-animation-name: redPulse;
+  -webkit-animation-name: greenPulse;
   -webkit-animation-duration: .75s;
   -webkit-animation-iteration-count: infinite;
 }

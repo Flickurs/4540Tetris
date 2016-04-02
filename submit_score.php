@@ -22,7 +22,7 @@ function echoScores($error)
 	{
 		global $db;
 
-	    $query = "SELECT tname,score FROM high_scores ORDER BY score DESC LIMIT 10;";
+	    $query = "SELECT tname,score FROM high_scores ORDER BY score DESC LIMIT 7;";
 
 	    $statement = $db->prepare( $query );
 	    $statement->execute();
