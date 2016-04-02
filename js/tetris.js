@@ -224,8 +224,6 @@ class Tetris {
         this.draw_piece();
         this.draw_next();
         this.key_event_handler = this.handle_key_presses.bind(this);
-        // document.addEventListener('keydown', this.handle_key_presses.bind(this));
-        // this.start_game_loop();
     }
 
     set_up_board() {
@@ -256,7 +254,6 @@ class Tetris {
 
     end_game_loop() {
     	clearInterval(this.interval);
-    	// document.removeEventListener('keydown', this.handle_key_presses.bind(this));
     	set_opaque();
     }
 
@@ -504,9 +501,9 @@ $(function(){
 	get_high_scores();
 
 	$("#send_score").submit(function( event ) {
-		var player_name = $("#player_name").val();
-		if (player_name.length < 3 || player_name.length > 25) {
-			event.preventDefault();
+		event.preventDefault();
+        var player_name = $("#player_name").val();
+        if (player_name.length < 3 || player_name.length > 25) {
 			$("#player_name").parent().addClass("has-error");
 			if (player_name.length < 3)
 				var error_text = '<span class="text-danger" data-valmsg-for="player_name">Names must be at least 3 characters long.</span>';
@@ -514,6 +511,7 @@ $(function(){
 			return;
 		}
 		get_high_scores(player_name, score);
+        $('#submit_score').modal('toggle');
 	});
 
 	$("#submit_score").on("hidden.bs.modal", function() {
